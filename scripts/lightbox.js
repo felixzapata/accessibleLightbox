@@ -1,5 +1,5 @@
 (function() {
-	
+	/*jshint validthis:true */
     "use strict";
 
     var lightbox_a11y = function() {
