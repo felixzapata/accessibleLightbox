@@ -1,5 +1,5 @@
 (function() {
-	/*jshint validthis:true */
+    /*jshint validthis:true */
     "use strict";
 
     var lightbox_a11y = function() {
@@ -65,28 +65,26 @@
             var focusables = divObj.querySelectorAll('a'),
                 lenFocusables = focusables.length,
                 i;
-            // falta añadir resto de "focusables"
+            // TODO: add the other "focusables"
 
             for (i = lenFocusables - 1; i > -1; i--) {
                 focusables[i].setAttribute('tabindex', tabIdx);
             }
         } // setTabindex
 
-        if (document.addEventListener) {
+        function setKeyBoardEscapeEvent() {
 
-            document.addEventListener('keyup', function(event) {
+            if (document.addEventListener) {
+                document.addEventListener('keyup', keyBoardEscapeEventAction, true);
+            } else {
+                document.attachEvent('onkeyup', keyBoardEscapeEventAction, true);
+            }
+
+            function keyBoardEscapeEventAction(event) {
                 if (dialogopen && event.keyCode === 27) {
                     toggleDialog(ACTION_CLOSE);
                 }
-            }, true); // document.keyup
-        } else {
-
-            document.attachEvent('onkeyup', function(event) {
-                if (dialogopen && event.keyCode === 27) {
-                    toggleDialog(ACTION_CLOSE);
-                }
-            }, true); // document.keyup
-
+            }
         }
 
         function setOpenEvents() {
@@ -120,6 +118,7 @@
         function init() {
             setOpenEvents();
             setCloseEvents();
+            setKeyBoardEscapeEvent();
         }
 
         init();
