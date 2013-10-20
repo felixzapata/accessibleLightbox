@@ -11,15 +11,23 @@
             ACTION_OPEN = 'show',
             ACTION_CLOSE = 'hide';
 
-        function showDialog(el) {
-            oldfocus = el || document.activeElement;
+        function showDialog(element) {
+            oldfocus = element || document.activeElement;
             toggleDialog(ACTION_OPEN);
-            el.preventDefault();
+            if (element.preventDefault) {
+                element.preventDefault();
+            } else {
+                element.returnValue = false;
+            }
         }
 
-        function hideDialog(el) {
+        function hideDialog(element) {
             toggleDialog(ACTION_CLOSE);
-            el.preventDefault();
+            if (element.preventDefault) {
+                element.preventDefault();
+            } else {
+                element.returnValue = false;
+            }
         }
 
         function toggleDialog(sh) {
