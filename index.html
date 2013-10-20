@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Accessible lightbox example</title>
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/menu1.css" rel="stylesheet" />
+    <link href="css/lightbox.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <div id="container">
+
+        <div id="banner" role="banner" aria-label="Cabecera principal">
+            <div class="padder">
+                <h1>
+                    Accessible Lightbox
+                    <span class="subtit">role="dialog" + focus() + aria-hidden + tabindex</span>
+                </h1>
+            </div>
+            <!--/.padder-->
+        </div>
+
+        <div id="menu" role="navigation" aria-label="Secciones">
+            <ul>
+                <li>
+                    <a href="dummy.htm" class="lightbox_a11y">
+                        <span>Codemotion</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="dummy.htm" class="lightbox_a11y">
+                        <span>Contact</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="dummy.htm" class="lightbox_a11y">
+                        <span>My account</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--/#menu-->
+
+        <div id="main" role="main" aria-label="Lorem ipsum">
+            <div class="padder">
+
+                <h1>Lorem ipsum dolor</h1>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                <p>¿Can I open an <a href="dummy.htm" class="lightbox_a11y">accessible lightbox</a>?</p>
+
+                <p>Lorem ipsum dolor sit amet,
+                    <a href="dummy.htm" class="lightbox_a11y"> consectetur adipisicing elit </a>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            </div>
+            <!--/.padder-->
+
+        </div>
+        <!--/#main-->
+
+    </div>
+    <!--/#container-->
+
+
+    <div id="aviso" role="dialog" aria-labelledby="h1-dialog">
+        <h1 id="h1-dialog">Send email</h1>
+        <form action="dummy.php">
+            <label for="tx-nombre">
+                <span>Your name:</span>
+                <input id="tx-nombre" name="nombre" type="text" />
+            </label>
+
+            <label for="tx-email">
+                <span>Your email:</span>
+                <input id="tx-email" name="email" type="text" />
+            </label>
+
+            <label for="tx-asunto">
+                <span>Subject:</span>
+                <input id="tx-asunto" name="asunto" type="text" />
+            </label>
+
+            <label for="tx-mensaje">
+                <span>Your message:</span>
+                <textarea id="tx-mensaje" name="mensaje"></textarea>
+            </label>
+
+            <div class="ok-cancel">
+                <button type="submit" class="close_lightbox_a11y close-button">Send</button>
+                <button type="reset" class="close_lightbox_a11y close-button">Cancel</button>
+            </div>
+            <!--/.ok-cancel-->
+
+        </form>
+    </div>
+    <!--/#aviso-->
+
+    <script src="scripts/lightbox.js"></script>
+
+</body>
+
+</html>
