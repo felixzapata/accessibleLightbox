@@ -14,10 +14,12 @@
         function showDialog(el) {
             oldfocus = el || document.activeElement;
             toggleDialog(ACTION_OPEN);
+            el.preventDefault();
         }
 
         function hideDialog(el) {
             toggleDialog(ACTION_CLOSE);
+            el.preventDefault();
         }
 
         function toggleDialog(sh) {
@@ -51,7 +53,7 @@
 
 
         function setTabindex(divObj, tabIdx) {
-            var focusables = divObj.getElementsByTagName('a'),
+            var focusables = divObj.querySelectorAll('a'),
                 lenFocusables = focusables.length,
                 i;
             // falta añadir resto de "focusables"
@@ -61,35 +63,48 @@
             }
         } // setTabindex
 
-        document.addEventListener('keyup', function(event) {
-            if (dialogopen && event.keyCode === 27) {
-                toggleDialog(ACTION_CLOSE);
-            }
-        }, true); // document.keyup
+        if (document.addEventListener) {
+
+            document.addEventListener('keyup', function(event) {
+                if (dialogopen && event.keyCode === 27) {
+                    toggleDialog(ACTION_CLOSE);
+                }
+            }, true); // document.keyup
+        } else {
+
+            document.attachEvent('onkeyup', function(event) {
+                if (dialogopen && event.keyCode === 27) {
+                    toggleDialog(ACTION_CLOSE);
+                }
+            }, true); // document.keyup
+
+        }
 
         function setOpenEvents() {
-            var openElements = document.querySelectorAll(CLASS_OPEN),
+            var openElements = document.querySelectorAll('.' + CLASS_OPEN),
                 len = openElements.length,
                 i;
             for (i = len - 1; i > -1; i--) {
-                openElements[i].addEventListener('onclick', function(event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    showDialog(this);
-                }, true);
+                if (document.addEventListener) {
+                    openElements[i].addEventListener('click', showDialog, true);
+                } else {
+                    openElements[i].attachEvent('onclick', showDialog, true);
+                }
+
             }
         }
 
         function setCloseEvents() {
-            var closeElements = document.querySelectorAll(CLASS_CLOSE),
+            var closeElements = document.querySelectorAll('.' + CLASS_CLOSE),
                 len = closeElements.length,
                 i;
             for (i = len - 1; i > -1; i--) {
-                closeElements[i].addEventListener('onclick', function(event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    hideDialog(this);
-                }, true);
+                if (document.addEventListener) {
+                    closeElements[i].addEventListener('click', hideDialog, true);
+                } else {
+                    closeElements[i].attachEvent('onclick', hideDialog, true);
+                }
+
             }
         }
 
