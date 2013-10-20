@@ -1,5 +1,5 @@
 (function() {
-
+	
     "use strict";
 
     var lightbox_a11y = function() {
@@ -11,22 +11,23 @@
             ACTION_OPEN = 'show',
             ACTION_CLOSE = 'hide';
 
-        function showDialog(element) {
-            oldfocus = element || document.activeElement;
+        function showDialog(event) {
+            // When you use addEventListener, 'this' will be bound automatically.
+            oldfocus = (event.target) ? this : document.activeElement;
             toggleDialog(ACTION_OPEN);
-            if (element.preventDefault) {
-                element.preventDefault();
+            if (event.preventDefault) {
+                event.preventDefault();
             } else {
-                element.returnValue = false;
+                event.returnValue = false;
             }
         }
 
-        function hideDialog(element) {
+        function hideDialog(event) {
             toggleDialog(ACTION_CLOSE);
-            if (element.preventDefault) {
-                element.preventDefault();
+            if (event.preventDefault) {
+                event.preventDefault();
             } else {
-                element.returnValue = false;
+                event.returnValue = false;
             }
         }
 
@@ -47,14 +48,14 @@
                 pagebg.style.opacity = '0.4';
                 pagebg.setAttribute('aria-hidden', 'true');
                 setTabindex(pagebg, -1);
+
             } else {
+
                 dialogopen = false;
                 dialogbox.style.display = 'none';
-
                 pagebg.style.opacity = '1.0';
                 pagebg.setAttribute('aria-hidden', 'false');
                 setTabindex(pagebg, 0);
-
                 oldfocus.focus();
             }
         }
@@ -94,9 +95,9 @@
                 i;
             for (i = len - 1; i > -1; i--) {
                 if (document.addEventListener) {
-                    openElements[i].addEventListener('click', showDialog, true);
+                    openElements[i].addEventListener('click', showDialog, false);
                 } else {
-                    openElements[i].attachEvent('onclick', showDialog, true);
+                    openElements[i].attachEvent('onclick', showDialog, false);
                 }
 
             }
@@ -108,9 +109,9 @@
                 i;
             for (i = len - 1; i > -1; i--) {
                 if (document.addEventListener) {
-                    closeElements[i].addEventListener('click', hideDialog, true);
+                    closeElements[i].addEventListener('click', hideDialog, false);
                 } else {
-                    closeElements[i].attachEvent('onclick', hideDialog, true);
+                    closeElements[i].attachEvent('onclick', hideDialog, false);
                 }
 
             }
